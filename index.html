@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Music Player</title>
+    <link rel="stylesheet" href="./src/styles/styles.css">
+  </head>
+  <body>
+    
+    <div class="main-app">
+
+      <div class="opening-app-screen">
+        <img src="./images/main-screen.png">
+
+        <div class="purple-heart-section"> 
+          <img id="purple-pixel-heart" class="purple-heart-1 opening-purple-heart-js" src="./images/purple-pixel-heart.svg" alt="purple-pixel-heart">
+          <img id="purple-pixel-heart" class="purple-heart-2 opening-purple-heart-js" src="./images/purple-pixel-heart.svg" alt="purple-pixel-heart">
+        </div>
+
+        <div class="pink-heart-section">
+          <img id="pink-pixel-heart" class="pink-heart-1" src="./images/pink-pixel-heart.svg" alt="pink-pixel-heart">
+          <img id="pink-pixel-heart" class="pink-heart-2" src="./images/pink-pixel-heart.svg" alt="pink-pixel-heart">
+        </div>
+
+        <div class="click-button-container">
+          <img class="click-button" src="./images/click-button.svg" alt="click-button">
+        </div>
+      </div>
+
+      <div class="secret-message-screen hide">
+        <img src="./images/special-message.png">
+
+        <div class="get-back-btn">
+          <img id="purple-pixel-heart" class="purple-heart-secret-message" src="./images/purple-pixel-heart.svg" alt="purple-pixel-heart">
+        </div>
+      </div>
+
+      <div class="music-player-screen hide">
+
+        <img id="purple-pixel-heart" class="purple-heart-3" src="./images/purple-pixel-heart.svg" alt="purple-pixel-heart">
+        <img id="purple-pixel-heart" class="purple-heart-4" src="./images/purple-pixel-heart.svg" alt="purple-pixel-heart">
+
+        <div class="song-title-section">
+          <p class="song-title"></p>
+        </div>
+
+        <div class="image-section">
+          <img class="bts-army-white-logo" src="./images/bts-logo-white.png">
+          <input type="range" value="0" min="0" max="100" class="progress-bar">
+        </div>
+
+        <audio class="audio-player">
+        </audio>
+    
+        
+        <div class="music-player-buttons-container">
+          <img class="play-previous-song-button" src="./images/play-previous-song.svg">
+          <img class="play-song-button" src="./images/play-song-button.svg">
+          <img class="play-next-song-button" src="./images/play-next-song.svg">
+       </div>
+    
+
+    </div>
+  
+
+    <script defer type="module" src="./src/scripts/script.js"></script>
+  </body>
+</html>

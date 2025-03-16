@@ -1,0 +1,29 @@
+# Ignore node_modules (dependencies)
+node_modules/
+
+# Ignore Electron build artifacts
+dist/
+out/
+*.asar
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore environment files
+.env
+
+# Folder
+Font/
+images/
+songs/
+
+# Files with a certain extension
+*.json
+
+# Files
+preload.js
+renderer.js
+music-player.html
+musicPlayer.css
+musicPlayer.js

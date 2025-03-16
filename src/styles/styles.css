@@ -1,0 +1,289 @@
+:root {
+    --color-1: #B37EB5;
+    --color-2: #A27EAC;
+    --color-3: #D425EF;
+    --color-4: #B3E5FC;
+    --color-5: #7AB1CF;
+    --color-6: #CBFFFE;
+    --color-7: #FFC3ED;
+    --color-8: #EBAEFB;
+    --color-9: #5F2568;
+    --color-10: #E6C9F5;
+
+    --background-gradient-1: linear-gradient(var(--color-5), var(--color-7));
+    --background-gradient-2: linear-gradient(var(--color-4), var(--color-10));
+}
+
+html, body{
+    -webkit-app-region: drag;
+    user-select: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.main-app {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 15px; /* Adjust this value to control roundness */
+}
+
+/* Hide & Show */
+
+.hide{
+    display: none;
+}
+
+.opening-app-screen,
+.secret-message-screen,
+.music-player-screen{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.show{
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Purple Pixel Heart */
+
+#purple-pixel-heart{
+    position: absolute; 
+    cursor: pointer;
+    -webkit-app-region: no-drag; /* Corrected */
+}
+
+.purple-heart-1{
+    top:0px;
+    left:85%;
+}
+
+.purple-heart-2{
+    top:0px;
+    right:87%;
+}
+
+.purple-heart-3{
+    top:9px;
+    right: 87%;
+}
+
+.purple-heart-4{
+    top:9px;
+    left:85%;
+}
+
+.purple-heart-secret-message{
+    width: 33px;
+    height: 32px;
+    top: 391px;
+    left: 191px;
+}
+
+#purple-pixel-heart:hover{
+    transform: scale(1.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* click Button */
+
+.click-button{
+    position: absolute;
+    top: 208px;
+    left: 94px;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+}
+
+.click-button:hover{
+    transform: scale(1.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Pink Pixel Heart */
+
+#pink-pixel-heart{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    animation: rotateHeart 3s linear infinite;
+    -webkit-app-region: no-drag;
+}
+
+.pink-heart-1{
+    top: 68px;
+    left: 23px;
+}
+
+.pink-heart-2{
+    top: 68px;
+    left: 228px;
+}
+
+/* Music Player Screen */
+
+.music-player-screen{
+    background: var(--background-gradient-1);
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 15px
+}
+
+.music-player-buttons-container{
+    background: var(--background-gradient-2);
+    position: absolute;
+    width: 252px;
+    height: 107px;
+    top: 333px;
+    left: 24px;
+    border-radius: 10px;
+}
+
+/* Song title section */
+
+.song-title-section{
+    background: var(--color-7);
+    position: absolute;
+    width: 205px;
+    height: 35px;
+    border-radius: 50px;
+    top: 11px;
+    left: 50px;
+
+    /* Center Content */
+    display: flex;
+    align-items: center; /* Vertically center */
+    justify-content: center; /* Horizontally center */
+}
+
+.song-title{
+    font-family: 'Sans-serif';
+    text-align: center;
+}
+
+/* Music Player Image Section */
+
+.image-section{
+    background: black;
+    position: absolute;
+    width: 265px;
+    height: 264px;
+    border-radius: 9px;
+    top: 59px;
+    left:20px;
+}
+
+.bts-army-white-logo{
+    position: absolute;
+    width: 92.93px;
+    height: 95px;
+    top: 84px;
+    left: 86px;
+}
+
+/* Music player progress bar */
+
+.progress-bar{
+    position: absolute;
+    top: 235px;
+    left: 2px;
+    width: 252px;
+    height: 12px;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: white;
+    outline: none;
+    -webkit-app-region: no-drag;
+    appearance: none;
+}
+
+.progress-bar::-webkit-slider-thumb{
+    background-image: url('../../images/pink-pixel-heart.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 45px;
+    height: 35px;
+    margin: 1px;
+    appearance: none;
+    -webkit-app-region: no-drag;
+}
+
+/* Music Player Container & Buttons */
+
+.play-previous-song-button,
+.play-song-button,
+.pause-song-button,
+.play-next-song-button,
+.menu-button {
+    position: absolute;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+}
+
+.play-previous-song-button:hover,
+.play-song-button:hover,
+.pause-song-button:hover,
+.play-next-song-button:hover,
+.menu-button:hover {
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1.2);
+}
+
+.play-song-button,
+.pause-song-button{
+    width: 63px;
+    height: 63px;
+}
+
+.play-previous-song-button{
+    top:16px;
+    left:19px;
+}
+
+.play-song-button{
+    top: 16px;
+    left: 92px;
+}
+
+.pause-song-button{
+    top: 16px;
+    left: 92px;
+}
+
+.play-next-song-button{
+    top: 15.74px;
+    left: 200.25px;
+}
+
+.menu-button{
+    width: 88px;
+    height: 36px;
+    top: 71px;
+    left: 7px;
+}
+
+/* Keyframes Animation */
+
+@keyframes rotateHeart{
+    from {transform: rotateY(0deg);}
+    to {transform: rotateY(360deg);}
+}
+
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to{
+        opacit: 1;
+        transform: scale(1);
+    }
+}
