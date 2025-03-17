@@ -1,62 +1,21 @@
-let songs = [];
-let currentSongIndex = 0;
-let isPlaying = false;
+let numbers = [1, 2, 3, 4, 5];
+let filtered = numbers.filter(num => num > 2);
+console.log(filtered); // [3, 4, 5]
 
-const audio = document.querySelector('.audio');
+let words = [{w: "hello"}, {w: "jello"}, {w: "mello"}, {W: "FELO"}];
+filtered = words.filter(word => word.w);
+console.log(filtered);
 
-document.querySelector('.menu-button').addEventListener('click', () => {
-    const listSongs = document.querySelector('.list-of-songs');
+let song = [{title: "haam tum sath sath"},{title: "hora hora"}];
 
-    listSongs.classList.remove('hide');
-        
-        songs.forEach((song, index) => {
-            console.log(`Song ${index+1} - ${song.title}`);
-            let pElem = document.createElement("p");
-            pElem.textContent = `${index+1} - ${song.title}`;
-            pElem.classList.add('song-list');
+let input = document.querySelector('.input')
 
-            pElem.addEventListener('click', () => {
-                console.log('clicked');
-            });
+input.addEventListener("input", () => {
+    let searchTerm = input.value.toLowerCase().trim();
 
-            pElem.style.cursor = 'pointer';
-            listSongs.appendChild(pElem);
-        })
-        
+    filtered = song.filter(s => s.title.includes(searchTerm))
+
+    
+
+    console.log(filtered);
 })
-
-function play(){
-    audio.play();
-    isPlaying = true;
-    loadSongs();
-}
-
-fetch('src/data/songs.json')
-    .then(response => response.json())
-    .then(data => {
-        if (Array.isArray(data)) {
-            songs = data;
-        } else {
-            throw new Error('invalid Format');
-        }
-        
-})
-.catch(error => console.error('error loading songs', error));
-
-
-function loadSongs() {
-
-    if(!Array.isArray(songs) || songs.length === 0) {
-        console.log("No songs available or invalid format");
-        return;
-    }
-
-    songs.forEach(song => {
-        console.log(song);
-    })
-    audio.src = songs[currentSongIndex].file;
-}
-
-document.addEventListener("DOMContentLoaded", () => (
-    loadSongs()
-))

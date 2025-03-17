@@ -2,13 +2,12 @@ let songs = [];
 let currentSongIndex = 0
 let isPlaying = false;
 
-
-
 // Screen Variables 
 const openingScreen = document.querySelector('.opening-app-screen');
 const secretMessageScreen = document.querySelector('.secret-message-screen');
 const secretMessageScreen2 = document.querySelector('.secret-message-screen-2');
 const musicPlayerScreen = document.querySelector('.music-player-screen');
+const songsListScreen = document.querySelector('.song-list-screen ');
 
 // Functional SVG icons variables
 const clickButton = document.querySelector('.click-button');
@@ -21,11 +20,16 @@ const songTitle = document.querySelector('.song-title');
 // Audio Player 
 const audioPlayer = document.querySelector('.audio-player');
 
+// List of Songs
+const listOfSongs = document.querySelector('.list-of-songs');
+
 /// Audio Player Buttons
 const playPreviousSongButton = document.querySelector('.play-previous-song-button');
 const playSongButton = document.querySelector('.play-song-button');
 const playNextSongButton = document.querySelector('.play-next-song-button');
+const menuButton = document.querySelector('.menu-button');
 const progressBar = document.querySelector('.progress-bar');
+const songListBackButton = document.querySelector('.song-list-back-button');
 
 // Screen changing to secret message screen
 openingPurpleHearts.forEach(purpleHeart => {
@@ -123,6 +127,66 @@ audioPlayer.addEventListener('timeupdate', () => {
 progressBar.addEventListener('input', () => {
     audioPlayer.currentTime = (progressBar.value/100)*audioPlayer.duration;
 })
+
+// Menu button and list of songs
+menuButton.addEventListener('click', () => {
+    songsListScreen.classList.remove('hide');
+
+    generateSongList();
+})
+
+function generateSongList() {
+    if (listOfSongs.children.length > 0) return;
+
+    songs.forEach((song, index) => {
+        console.log(`Song ${index+1} - ${song.title}`);
+        let pElem = document.createElement("p");
+        pElem.textContent = `${index+1}. ${song.title}`;
+        pElem.classList.add('song-list-p-element');
+
+        pElem.addEventListener('click', () => {
+            currentSongIndex = index;
+            audioPlayer.src = songs[index].file;
+            play();
+            updateSongTitle();
+        });
+        
+        listOfSongs.appendChild(pElem);
+    })
+}
+
+songListBackButton.addEventListener('click', () => {
+    songsListScreen.classList.add('hide');
+})
+
+// Search Bar
+const searchInput = document.querySelector('.search-input');
+
+searchInput.addEventListener("input", () => {
+    let searchTerm = searchInput.value.toLowerCase().trim();
+
+    let filteredSongs = songs.filter(song => song.title.toLowerCase().includes(searchTerm));
+    listOfSongs.innerHTML = '';
+
+    filteredSongs.forEach(filteredSong => {
+        console.log(`Song ${filteredSong.title}`);
+        let pElem = document.createElement("p");
+        pElem.textContent = filteredSong.title;
+        pElem.classList.add('song-list-p-element');
+
+        pElem.addEventListener('click', () => {
+            let originalIndex = songs.findIndex(song => song.title === filteredSong.title);
+            if (originalIndex !== -1) {
+                currentSongIndex = originalIndex;  
+                audioPlayer.src = songs[originalIndex].file;
+                play();
+                updateSongTitle();
+            }
+        });
+        
+        listOfSongs.appendChild(pElem);
+    })
+}) 
 
 // Fetch songs.json 
 fetch('src/data/songs.json')

@@ -6,6 +6,7 @@
 
     <title>Music Player</title>
     <link rel="stylesheet" href="./src/styles/styles.css">
+    <link rel="icon" href="images/icon.ico">
   </head>
   <body>
     
@@ -47,7 +48,7 @@
         </div>
 
         <div class="image-section">
-          <img class="bts-army-white-logo" src="./images/bts-logo-white.png">
+          <img class="bts-army-white-logo" src="./images/bts-logo-white.png" alt="bts-logo-white">
           <input type="range" value="0" min="0" max="100" class="progress-bar">
         </div>
 
@@ -56,11 +57,32 @@
     
         
         <div class="music-player-buttons-container">
-          <img class="play-previous-song-button" src="./images/play-previous-song.svg">
-          <img class="play-song-button" src="./images/play-song-button.svg">
-          <img class="play-next-song-button" src="./images/play-next-song.svg">
+          <img class="play-previous-song-button" src="./images/play-previous-song.svg" alt="play-previous-song">
+          <img class="play-song-button" src="./images/play-song-button.svg" alt="play-song-button">
+          <img class="play-next-song-button" src="./images/play-next-song.svg" alt="play-next-song">
+          <img class="menu-button" src="images/menu-button.svg" alt="menu-button">
        </div>
-    
+
+      </div>
+
+      <div class="song-list-screen hide">
+
+        <div class="song-list-button-container">
+          <img class="song-list-back-button" src="images/song-list-back-button.svg" alt="back-button">
+
+          <div class="search-container">
+            <svg class="search-icon" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M15.5,14H14.71L14.43,13.73A6.53,6.53 0 0,0 16,10.5A6.5,6.5 0 1,0 9.5,17A6.53,6.53 0 0,0 13.73,14.43L14,14.71V15.5L19,20.5L20.5,19L15.5,14M10.5,14A3.5,3.5 0 1,1 14,10.5A3.5,3.5 0 0,1 10.5,14Z" />
+            </svg>
+            <input type="text" class="search-input" placeholder="Search songs...">
+        </div>
+        
+          <img class="add-list-button" src="images/add-list.svg" alt="add-songs-button">
+          <input type="file" accept=".mp3/.wav" multiple style="display: none;">
+        </div>
+
+        <div class="list-of-songs"></div>
+      </div>
 
     </div>
   

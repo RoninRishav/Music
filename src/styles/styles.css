@@ -35,6 +35,7 @@ html, body{
 
 .hide{
     display: none;
+    pointer-events: none;
 }
 
 .opening-app-screen,
@@ -49,6 +50,7 @@ html, body{
 .show{
     display: block;
     animation: fadeIn 0.3s ease-in-out;
+    pointer-events: auto;
 }
 
 /* Purple Pixel Heart */
@@ -222,7 +224,9 @@ html, body{
 .play-song-button,
 .pause-song-button,
 .play-next-song-button,
-.menu-button {
+.menu-button,
+.song-list-back-button,
+.add-list-button:hover {
     position: absolute;
     cursor: pointer;
     -webkit-app-region: no-drag;
@@ -232,7 +236,9 @@ html, body{
 .play-song-button:hover,
 .pause-song-button:hover,
 .play-next-song-button:hover,
-.menu-button:hover {
+.menu-button:hover,
+.song-list-back-button:hover,
+.add-list-button:hover {
     transition: transform 0.3s ease-in-out;
     transform: scale(1.2);
 }
@@ -268,6 +274,104 @@ html, body{
     height: 36px;
     top: 71px;
     left: 7px;
+}
+
+/* Song List Screen */
+
+.song-list-screen{
+    position: absolute;
+    top: 58px;
+    width: 300px;
+    height: 392px;
+    border-radius: 15px;
+    background-color: var(--color-7);
+    -webkit-app-region: no-drag;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+}
+
+.song-list-screen::-webkit-scrollbar{
+   display: none;
+}
+
+
+.song-list-button-container{
+    background-color: var(--color-4);
+    position: fixed;
+    width: 300px;
+    height: 52px;
+    top: 58px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.song-list-back-button{
+    position: absolute;
+    left: 10px;
+}
+
+.add-list-button{
+    position: absolute;
+    left: 260px;
+}
+
+.list-of-songs{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    cursor: pointer;
+}
+
+.song-list-p-element{
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #5F2568;
+}
+
+/* Search Bar */
+.search-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: 50px;
+    width: 100%;
+    max-width: 230px; /* Adjust width as needed */
+    margin: 10px auto;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.search-input {
+    width: 65%;
+    padding: 8px 10px;
+    padding-left: 35px; /* Space for icon */
+    font-size: 15px;
+    color: white;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s ease-in-out;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-input:focus {
+    outline: none;
+    border-bottom: 2px solid #5F2568;
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+    fill: white; /* Adjust color */
+    opacity: 0.7;
 }
 
 /* Keyframes Animation */
