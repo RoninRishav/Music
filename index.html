@@ -75,10 +75,10 @@
                 <path fill="currentColor" d="M15.5,14H14.71L14.43,13.73A6.53,6.53 0 0,0 16,10.5A6.5,6.5 0 1,0 9.5,17A6.53,6.53 0 0,0 13.73,14.43L14,14.71V15.5L19,20.5L20.5,19L15.5,14M10.5,14A3.5,3.5 0 1,1 14,10.5A3.5,3.5 0 0,1 10.5,14Z" />
             </svg>
             <input type="text" class="search-input" placeholder="Search songs...">
-        </div>
-        
+         </div>
+         
           <img class="add-list-button" src="images/add-list.svg" alt="add-songs-button">
-          <input type="file" accept=".mp3/.wav" multiple style="display: none;">
+          <!-- <input id="fileInput" type="file" accept="audio/*" multiple style="display: none;"> -->
         </div>
 
         <div class="list-of-songs"></div>
@@ -88,5 +88,6 @@
   
 
     <script defer type="module" src="./src/scripts/script.js"></script>
+    <script src="renderer.js"></script>
   </body>
 </html>

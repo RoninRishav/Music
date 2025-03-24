@@ -30,6 +30,11 @@ const playNextSongButton = document.querySelector('.play-next-song-button');
 const menuButton = document.querySelector('.menu-button');
 const progressBar = document.querySelector('.progress-bar');
 const songListBackButton = document.querySelector('.song-list-back-button');
+const addSongsButton = document.querySelector('.add-list-button');
+
+// Input Elements
+const searchInput = document.querySelector('.search-input');
+const fileInput = document.getElementById('fileInput');
 
 // Screen changing to secret message screen
 openingPurpleHearts.forEach(purpleHeart => {
@@ -136,7 +141,7 @@ menuButton.addEventListener('click', () => {
 })
 
 function generateSongList() {
-    if (listOfSongs.children.length > 0) return;
+    listOfSongs.innerHTML = '';
 
     songs.forEach((song, index) => {
         console.log(`Song ${index+1} - ${song.title}`);
@@ -160,8 +165,6 @@ songListBackButton.addEventListener('click', () => {
 })
 
 // Search Bar
-const searchInput = document.querySelector('.search-input');
-
 searchInput.addEventListener("input", () => {
     let searchTerm = searchInput.value.toLowerCase().trim();
 
@@ -188,20 +191,6 @@ searchInput.addEventListener("input", () => {
     })
 }) 
 
-// Fetch songs.json 
-fetch('src/data/songs.json')
-    .then(Response => Response.json())
-    .then(data => {
-        console.log("Load: ", data);
-        if(Array.isArray(data)){
-            songs = data;
-            loadSongs();
-        } else {
-            throw new Error("Invalid JSON format: Expected an Array");
-        }
-})
-.catch(error => console.error("Error Loading songs:", error));
-
 // Load songs into player
 function loadSongs() {
 
@@ -217,8 +206,92 @@ function loadSongs() {
     audioPlayer.src = songs[currentSongIndex].file;
 }
 
-// Initialize player when page loads
+// Add songs button functionality
+addSongsButton.addEventListener('click', async () => {
+    if (!window.electronAPI) {
+        console.error("electronAPI is not available.");
+        return;
+    }
+
+    try {
+        const selectedFile = await window.electronAPI.openFileDialog();
+
+        if (selectedFile) {
+            const { title, file } = selectedFile;
+
+            console.log("Selected File: ", file);
+            console.log("Extracted Title: ", title);
+
+            window.electronAPI.addSong({ title, file });
+
+        } else {
+            console.log("No file selected.");
+        }
+    } catch (error) {
+        console.error("Error selecting file", error);
+    }
+});
+
+if(window.electronAPI) {
+    window.electronAPI.dataReceived((songData) => {
+        if(songData.error) {
+            console.error('Error', songData.error);
+            return;
+        }
+
+        songs.push(songData);
+
+        console.log('Song added', songData.title);
+
+        generateSongList();
+         
+        
+        
+        // If this is the first song, start playing it
+        if (songs.length === 1) {
+            currentSongIndex = 0;
+            audioPlayer.src = songData.file;
+            updateSongTitle();
+            play();
+        }
+    })
+
+    window.electronAPI.receive('song-list-updated', (updatedSongs) => {
+        console.log('Updated song list received', updatedSongs)
+        songs = updatedSongs;
+        generateSongList();
+        updateSongTitle();
+    });
+}
+
+
+
+// Modify your fetch function to handle the case where songs.json doesn't exist yet
+// Replace your existing fetch function with this:
+function loadSongsFromJson() {
+    return fetch('src/data/songs.json')
+        .then(Response => Response.json())
+        .then(data => {
+            console.log("Load: ", data);
+            if(Array.isArray(data)){
+                songs = data;
+                loadSongs();
+            } else if(data.songs && Array.isArray(data.songs)) {
+                songs = data.songs;  // If the JSON has a songs property
+                loadSongs();
+            } else {
+                throw new Error("Invalid JSON format: Expected an Array or object with songs array");
+            }
+    })
+    .catch(error => {
+        console.error("Error Loading songs:", error);
+        songs = []; // Initialize with empty array if loading fails
+        return songs;
+    });
+}
+
+// Call this instead of the direct fetch
 document.addEventListener('DOMContentLoaded', () => {
-    loadSongs();
+    loadSongsFromJson();
     updateSongTitle();
-})
+});
